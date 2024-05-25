@@ -21,20 +21,20 @@ function adicionalinha() {
     const inputNomeAtividade = document.getElementById('nome-atividade');
     const inputNotaAtividade = document.getElementById('nota-atividade');
 
-    if(atividades.includes(inputNomeAtividade.value)){
-        alert(`A atividade: ${inputNomeAtividade.value} já foi insrida`);
+    if (atividades.includes(inputNomeAtividade.value)) {
+        alert(`A atividade: ${inputNomeAtividade.value} já foi inserida`);
+    } else {
+        atividades.push(inputNomeAtividade.value);
+        notas.push(parseFloat(inputNotaAtividade.value));
+
+        let linha = '<tr>';
+        linha += `<td>${inputNomeAtividade.value}</td>`;
+        linha += `<td>${inputNotaAtividade.value}</td>`;
+        linha += `<td>${inputNotaAtividade.value >= notaMinima ? imgAprovado : imgReprovado}</td>`;
+        linha += '</tr>';
+
+        linhas += linha;
     }
-
-    atividades.push(inputNomeAtividade.value);
-    notas.push(parseFloat(inputNotaAtividade.value));
-
-    let linha = '<tr>';
-    linha += `<td>${inputNomeAtividade.value}</td>`;
-    linha += `<td>${inputNotaAtividade.value}</td>`;
-    linha += `<td>${inputNotaAtividade.value >= notaMinima ? imgAprovado : imgReprovado}</td>`;
-    linha += '</tr>';
-
-    linhas += linha;
 
     inputNomeAtividade.value = '';
     inputNotaAtividade.value = '';
@@ -45,19 +45,19 @@ function atualizaTabela() {
     corpoTabela.innerHTML = linhas;
 }
 
-function atualizaMediaFinal(){
+function atualizaMediaFinal() {
     const mediaFinal = calculaMedia();
     document.getElementById('media-final-valor').innerHTML = mediaFinal;
-    document.getElementById('media-final-resultado').innerHTML = mediaFinal >= notaMinima ? spanAprovado : spanReprovado; 
+    document.getElementById('media-final-resultado').innerHTML = mediaFinal >= notaMinima ? spanAprovado : spanReprovado;
 
-    
+
 }
 
-function calculaMedia(){
+function calculaMedia() {
     let somaNotas = 0;
 
-    for(let i = 0; i < notas.length; i++){
+    for (let i = 0; i < notas.length; i++) {
         somaNotas += notas[i];
     }
-        return somaNotas / notas.length;
+    return somaNotas / notas.length;
 }
